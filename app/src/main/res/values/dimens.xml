@@ -18,4 +18,5 @@ limitations under the License. -->
     <dimen name="small_padding">6dp</dimen>
     <dimen name="divider_height">3dp</dimen>
     <dimen name="big_padding">16dp</dimen>
+    <dimen name="bigbigpadding">45dp</dimen>
 </resources>

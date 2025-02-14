@@ -29,15 +29,16 @@ public class MyButtonOnClickListener implements View.OnClickListener {
     int id;
     String word;
     private WordListAdapter.WordViewHolder holder;
-    public MyButtonOnClickListener(WordListAdapter.WordViewHolder holder, String word) {
+    public MyButtonOnClickListener(WordListAdapter.WordViewHolder holder) {
         this.holder = holder;
-        this.word = word;
     }
 
     public void onClick(View v) {
         this.id = holder.getAbsoluteAdapterPosition();
+        this.word = holder.wordItemView.getText().toString();
         if (v.getId() == R.id.delete_button) {
             holder.mDB.delete(id);
+            holder.mFather.notifyDataSetChanged();
         }
         if (v.getId() == R.id.edit_button) {
             holder.launchEditActivity(holder.getAbsoluteAdapterPosition(), word);

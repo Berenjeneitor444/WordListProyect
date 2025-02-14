@@ -54,7 +54,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     @Override
     public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.wordlist_item, parent, false);
-        return new WordViewHolder(itemView, mDB);
+        return new WordViewHolder(itemView, mDB, this);
     }
 
     @Override
@@ -73,15 +73,17 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         Button delete_button;
         Button edit_button;
         WordListOpenHelper mDB;
+        WordListAdapter mFather;
 
-        public WordViewHolder(View itemView, WordListOpenHelper db) {
+        public WordViewHolder(View itemView, WordListOpenHelper db, WordListAdapter father) {
             super(itemView);
             wordItemView = (TextView) itemView.findViewById(R.id.word);
             delete_button = (Button)itemView.findViewById(R.id.delete_button);
-            delete_button.setOnClickListener(new MyButtonOnClickListener(this, wordItemView.getText().toString()));
+            delete_button.setOnClickListener(new MyButtonOnClickListener(this));
             edit_button = (Button)itemView.findViewById(R.id.edit_button);
-            edit_button.setOnClickListener(new MyButtonOnClickListener(this, wordItemView.getText().toString()));
+            edit_button.setOnClickListener(new MyButtonOnClickListener(this));
             mDB = db;
+            mFather = father;
         }
         public void launchEditActivity(int id, String word){
             Intent intent = new Intent(mContext, EditWordActivity.class);
